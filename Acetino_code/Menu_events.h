@@ -46,6 +46,12 @@ result setVolume (eventMask e,navNode& nav,prompt& item) {
   return proceed;
 }
 
+result setTrackList (eventMask e,navNode& nav,prompt& item) {
+  scheduleList[ pos_track].timestamp = tracktime*1000;
+  scheduleList[ pos_track].track = track;
+  return proceed;
+}
+
 TOGGLE(fanCtrl,fanToggle,"FAN: ",doNothing,noEvent,noStyle
   ,VALUE("ON",HIGH,fanEvent,exitEvent)
   ,VALUE("OFF",LOW,fanEvent,exitEvent)
@@ -73,6 +79,9 @@ MENU(testMenu,"Test menu",doNothing,anyEvent,wrapStyle
 MENU(settingsMenu,"Settings menu",doNothing,anyEvent,wrapStyle
   ,FIELD(volume,"Volume","",0,30,5,1,setVolume,exitEvent ,wrapStyle)
   ,OP("Stop MP3",stopMP3,enterEvent)
+  ,FIELD(pos_track,"Track index: ","",1,50,1,1,doNothing,exitEvent ,wrapStyle)
+  ,FIELD(track,"Track","",1,50,1,1,setTrackList,exitEvent ,wrapStyle)
+  ,FIELD(tracktime,"Time Track","",1,10000,10,1,setTrackList,exitEvent ,wrapStyle)
   ,SUBMENU(setType)
   ,SUBMENU(fanToggle)
   ,EXIT("<Back")

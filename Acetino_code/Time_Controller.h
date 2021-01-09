@@ -35,6 +35,7 @@ class clockscheduler{
 
     void init(){
       current_track=0;
+      next_time.s = list[ current_track ].timestamp/1000;
     }
     
     void update_screen( menuOut& out, LcdProgressBar& lcd_pg ){
@@ -81,9 +82,11 @@ class clockscheduler{
       p_update = &clockscheduler::executePrint;
     }
     
-    void update( menuOut& out ){
+    void update(  ){
       if( timer.elapsed() >= ( chronoToSeconds( clock_time )*1000 ) ){
         timer.stop();
+        digitalWrite( FAN_PIN, false );
+        init();
         //Establecer todo al estado inicial
         //mainMenu[4].enabled=enabledStatus;
       }

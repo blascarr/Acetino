@@ -45,10 +45,10 @@ class Acetino{
         scheduler.player.volume(volume);
       }
 
-    void update( menuOut& out ){
+    void update(){
 
       if( millis() - playtime > playstamp ){
-          scheduler.update( out );
+          scheduler.update( );
           playtime = millis();
       }
   

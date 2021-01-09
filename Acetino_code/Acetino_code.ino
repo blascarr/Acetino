@@ -67,6 +67,6 @@ void loop() {
       //
     //}
 
-    model.update( out[0] );
+    model.update(  );
 
 }
